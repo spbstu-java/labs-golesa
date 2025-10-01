@@ -2,6 +2,7 @@ package lab2;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -16,7 +17,7 @@ public class AnnotatedMethodsCaller {
 
         for (Method method : methods) {
             RepeatCall annotation = method.getAnnotation(RepeatCall.class);
-            if (annotation != null) {
+            if (!Modifier.isPublic(method.getModifiers()) && annotation != null) {
                 if (!method.canAccess(targetClass))
                     method.setAccessible(true);
 
